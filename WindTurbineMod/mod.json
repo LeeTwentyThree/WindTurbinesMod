@@ -1,0 +1,12 @@
+{
+  "Id": "WindTurbinesMod",
+  "DisplayName": "Wind Turbines Mod",
+  "Author": "Lee23",
+  "Version": "1.0.2",
+  "Requires": [ ],
+  "Enable": true,
+  "Game": "Both",
+  "AssemblyName": "WindTurbinesMod.dll",
+  "EntryMethod": "WindTurbinesMod.QPatch.Patch",
+  "Config": {}
+}

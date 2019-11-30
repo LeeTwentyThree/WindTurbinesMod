@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 2427262829
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 525f3ae617281abd7da97126c1ec10be
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 788d2a713a074d2a40a95c72fb52cf1c
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/TurbineMod/Mat2.mat
+- Assets/TurbineMod/turbineloop.mp3
+- Assets/TurbineMod/Mat1.mat
+- Assets/TurbineMod/Tex_Blades.png
+- Assets/TurbineMod/Mat5.mat
+- Assets/TurbineMod/Tex_Pole.png
+- Assets/TurbineMod/turbine.fbx
+- Assets/TurbineMod/Tex_Base.png
+- Assets/TurbineMod/generator.fbx
+- Assets/TurbineMod/Mat4.mat
+- Assets/TurbineMod/Mat3.mat
+Dependencies: []
