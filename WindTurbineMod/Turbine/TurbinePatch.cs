@@ -25,7 +25,7 @@
         {
             if (prefab == null)
             {
-                prefab = QPatch.bundle.LoadAsset<GameObject>("turbine");
+                prefab = QPatch.bundle.LoadAsset<GameObject>("turbineprefab.prefab");
 
                 var techTag = prefab.AddComponent<TechTag>();
                 techTag.type = TechType;
@@ -45,7 +45,14 @@
                 {
                     foreach (Material mat in renderer.materials)
                     {
-                        if(mat.name != "Mat5") mat.shader = shader;
+                        mat.shader = shader;
+                        mat.SetTexture("_Specular", mat.mainTexture);
+                        if(mat.name.StartsWith("Mat5"))
+                        {
+                            mat.EnableKeyword("MARMO_EMISSION");
+                            mat.SetVector("_EmissionColor", new Color(1f, 0.3f, 0f) * 1f);
+                            mat.SetVector("_Illum_ST", new Vector4(1.0f, 1.0f, 0.0f, 0.0f));
+                        }
                     }
                 }
 
@@ -67,26 +74,18 @@
                 constructible.placeDefaultDistance = 6f;
                 constructible.placeMinDistance = 0.5f;
                 constructible.placeMaxDistance = 15f;
+                constructible.surfaceType = VFXSurfaceTypes.metal;
                 constructible.model = prefab.FindChild("Pole");
+
+                prefab.FindChild("Blade Parent").AddComponent<Light>();
 
                 var bounds = prefab.AddComponent<ConstructableBounds>();
                 WindTurbine turbine = prefab.AddComponent<WindTurbine>();
+                prefab.AddComponent<Light>().intensity = 1.6f;
                 turbine.soundLoop = QPatch.bundle.LoadAsset<AudioClip>("turbineloop");
                 turbine.Activate();
-
-                AddLight(prefab.transform, 1f, 25f, new Vector3(-6f, 15f, 0f));
             }
             return prefab;
-        }
-
-        void AddLight(Transform parent, float intensity, float range, Vector3 position)
-        {
-            var obj = new GameObject();
-            obj.transform.parent = parent;
-            Light light = obj.AddComponent<Light>();
-            light.intensity = intensity;
-            light.range = range;
-            light.transform.localPosition = position;
         }
 
         public void Patch()
