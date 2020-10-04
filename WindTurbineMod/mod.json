@@ -2,10 +2,10 @@
   "Id": "WindTurbinesMod",
   "DisplayName": "Wind Turbines Mod",
   "Author": "Lee23",
-  "Version": "1.0.2",
+  "Version": "1.1.3",
   "Requires": [ ],
   "Enable": true,
-  "Game": "Both",
+  "Game": "Subnautica",
   "AssemblyName": "WindTurbinesMod.dll",
   "EntryMethod": "WindTurbinesMod.QPatch.Patch",
   "Config": {}
