@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindTurbinesMod.Turbine
+namespace WindTurbinesMod.WindTurbine
 {
     public class TurbineSpin : MonoBehaviour
     {

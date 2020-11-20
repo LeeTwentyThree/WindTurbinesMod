@@ -1,4 +1,4 @@
-﻿namespace WindTurbinesMod.Turbine
+﻿namespace WindTurbinesMod.WindTurbine
 {
     using System;
     using System.Collections.Generic;
@@ -27,17 +27,20 @@
             {
                 prefab = QPatch.bundle.LoadAsset<GameObject>("turbineprefab.prefab");
 
+                //Need a tech tag for most prefabs
                 var techTag = prefab.AddComponent<TechTag>();
                 techTag.type = TechType;
 
-                // Set prefab identifier
+                // Set prefab identifier, not sure what this does
                 var prefabId = prefab.AddComponent<PrefabIdentifier>();
                 prefabId.ClassId = ClassID;
 
+                //A collider for the turbine pole and builder tool
                 var collider = prefab.AddComponent<BoxCollider>();
                 collider.size = new Vector3(2f, 17f, 2f);
-                collider.center = new Vector3(0f, 7.5f, 0f);
+                collider.center = new Vector3(0f, 9f, 0f);
 
+                //Update all shaders
                 var renderers = prefab.GetComponentsInChildren<Renderer>();
                 var shader = Shader.Find("MarmosetUBER");
 
@@ -76,12 +79,15 @@
                 constructible.placeMaxDistance = 15f;
                 constructible.surfaceType = VFXSurfaceTypes.metal;
                 constructible.model = prefab.FindChild("Pole");
+                constructible.forceUpright = true;
 
                 prefab.FindChild("Blade Parent").AddComponent<Light>();
 
                 var bounds = prefab.AddComponent<ConstructableBounds>();
                 WindTurbine turbine = prefab.AddComponent<WindTurbine>();
-                prefab.AddComponent<Light>().intensity = 1.6f;
+                var light = prefab.AddComponent<Light>();
+                light.intensity = 1.6f;
+                light.range = 15f;
                 turbine.soundLoop = QPatch.bundle.LoadAsset<AudioClip>("turbineloop");
                 turbine.Activate();
             }
@@ -90,11 +96,11 @@
 
         public void Patch()
         {
-            // Create a new TechType for new fabricator
+            // Create a new TechType for habitat builder
             this.TechType = TechTypeHandler.AddTechType(
                          internalName: NameID,
                          displayName: FriendlyName,
-                         tooltip: "High efficiency generator that runs on wind. Only works above water. Must be placed on a base piece to function.",
+                         tooltip: "High efficiency generator that runs on wind. Only works above water.",
                          sprite: QPatch.GetSprite("TurbineIcon"),
                          unlockAtStart: true);
 

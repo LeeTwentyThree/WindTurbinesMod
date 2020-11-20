@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace WindTurbinesMod.Turbine
+namespace WindTurbinesMod.WindTurbine
 {
-    class TurbineHealth : LiveMixin
+    class TurbineHealth : LiveMixin //LiveMixing so it can take damage and be repaired
     {
         static LiveMixinData dataAsset;
 
@@ -28,7 +28,7 @@ namespace WindTurbinesMod.Turbine
         {
             if(health <= 0f)
             {
-                health = 1f;
+                health = 1f; //Bad stuff happens when it dies, so keep the health above 1
             }
         }
     }
