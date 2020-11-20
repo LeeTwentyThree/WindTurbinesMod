@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 524522104
+CRC: 121192361
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 06ea3aab7ea54bc76b559b785523a892
+    Hash: 559018bdf48671c26c7d5f35d01889e5
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4b34c7a6b9f19fc0a839a56ee2fbc439
+    Hash: 828796b282b7afa0923b0db561380c11
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,22 +25,32 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
 - Class: 83
   Script: {instanceID: 0}
 Assets:
 - Assets/TurbineMod/Mat2.mat
-- Assets/TurbineMod/pole_normals2.png
+- Assets/TurbineMod/base_tex.png
 - Assets/TurbineMod/turbineprefab.prefab
 - Assets/TurbineMod/Mat1.mat
 - Assets/TurbineMod/turbineloop.mp3
 - Assets/TurbineMod/Tex_Blades.png
 - Assets/TurbineMod/Mat5.mat
-- Assets/TurbineMod/normal.jpg
+- Assets/TurbineMod/Mat6.mat
 - Assets/TurbineMod/turbine.fbx
 - Assets/TurbineMod/Tex_Base.png
 - Assets/TurbineMod/Tex_Pole2.png
+- Assets/TurbineMod/aluminum_normal.png
 - Assets/TurbineMod/generator.fbx
+- Assets/TurbineMod/Mat8.mat
 - Assets/TurbineMod/Mat4.mat
+- Assets/TurbineMod/Mat7.mat
 - Assets/TurbineMod/Mat3.mat
+- Assets/TurbineMod/base_normal.png
 - Assets/TurbineMod/Tex_Blades_normals.png
 Dependencies: []
