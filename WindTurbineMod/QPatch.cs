@@ -21,17 +21,35 @@ namespace WindTurbinesMod
         public static TechType turbineGenerator;
         public static TechType turbinePole;
         public static AssetBundle bundle;
+        public static WindTurbineConfig config;
+        public static string mainDirectory;
+        public static string assetsFolder;
 
         static void LoadAssetBundle()
         {
-            string mainDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string assetsFolder = Path.Combine(mainDirectory, "Assets");
             bundle = AssetBundle.LoadFromFile(Path.Combine(assetsFolder, "windturbineassets"));
         }
+
+        static void LoadConfig()
+        {
+            string configPath = Path.Combine(mainDirectory, "config.txt");
+            if (File.Exists(configPath))
+            {
+                using(StreamReader sr = new StreamReader(configPath))
+                {
+                    string json = sr.ReadToEnd();
+                    config = JsonUtility.FromJson<WindTurbineConfig>(json);
+                }
+            }
+        }
+
         [QModPatch]
         public static void Patch()
         {
+            mainDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            assetsFolder = Path.Combine(mainDirectory, "Assets");
             LoadAssetBundle();
+            LoadConfig();
             //patch crafting recipes
             //is there a more efficient way of doing this?
             turbineBlade = TechTypeHandler.AddTechType("TurbineBlade", "Turbine Blade", "Necessary component in constructing a wind turbine. Large and lightweight for maximum aerodynamics.", GetSprite("TurbineBlade"));
@@ -75,8 +93,12 @@ namespace WindTurbinesMod
             CraftDataHandler.SetTechData(turbinePole, techDataPole);
             CraftTreeHandler.AddCraftingNode(CraftTree.Type.Fabricator, turbinePole, "Resources", "Electronics");
 
-            var turbine = new Turbine.TurbinePatch();
+            var turbine = new WindTurbine.TurbinePatch();
             turbine.Patch();
+
+            //This just isn't working for now. Maybe another update?
+            //var windTool = new WindTool.WindToolPatch();
+            //windTool.Patch();
         }
 
         public static Atlas.Sprite GetSprite(string name)
