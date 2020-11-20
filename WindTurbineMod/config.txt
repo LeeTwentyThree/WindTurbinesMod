@@ -1,0 +1,5 @@
+{
+	"PositionInfluencesPower": true,
+	"TurbineTakesDamage": true,
+	"TurbineMakesNoise": true
+}
