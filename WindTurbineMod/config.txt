@@ -1,5 +1,6 @@
 {
 	"PositionInfluencesPower": true,
 	"TurbineTakesDamage": true,
-	"TurbineMakesNoise": true
+	"TurbineMakesNoise": true,
+	"MaxPower": 750
 }
