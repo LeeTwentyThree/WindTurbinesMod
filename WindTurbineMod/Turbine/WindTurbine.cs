@@ -34,7 +34,7 @@ namespace WindTurbinesMod.WindTurbine
         {
             spin = gameObject.FindChild("Blade Parent").AddComponent<TurbineSpin>();
             powerSource = gameObject.AddComponent<PowerSource>();
-            powerSource.maxPower = 750f;
+            powerSource.maxPower = QPatch.config.MaxPower;
             relay = gameObject.AddComponent<PowerRelay>();
             relay.internalPowerSource = powerSource;
             relay.dontConnectToRelays = false;
@@ -58,6 +58,7 @@ namespace WindTurbinesMod.WindTurbine
             health = gameObject.AddComponent<TurbineHealth>();
             health.SetData();
             health.health = 200f;
+            PDAEncyclopedia.Add("WindTurbine", true);
         }
 
         void SetupAudio()
@@ -66,23 +67,19 @@ namespace WindTurbinesMod.WindTurbine
             loopSource.clip = soundLoop;
             loopSource.loop = true;
             if (!loopSource.isPlaying) loopSource.Play();
-            loopSource.maxDistance = 15f;
+            loopSource.minDistance = 4f;
+            loopSource.maxDistance = 35f;
             loopSource.spatialBlend = 1f;
         }
 
         private float GetDepthScalar()
         {
-            return Mathf.Clamp(spin.transform.position.y / 35f, 0f, 1f);
-        }
-
-        private float GetSunScalar()
-        {
-            return Mathf.Clamp(DayNightCycle.main.GetLocalLightScalar() * 0.5f, 0.4f, 0.6f) + 0.4f;
+            return Mathf.Clamp((spin.transform.position.y + Ocean.main.GetOceanLevel()) / 35f, 0f, 1f);
         }
 
         private float GetRechargeScalar()
         {
-            return this.GetDepthScalar() * this.GetSunScalar();
+            return this.GetDepthScalar(); //Kind of redundant to have this, for now.
         }
 
         private void Update()
@@ -94,9 +91,9 @@ namespace WindTurbinesMod.WindTurbine
                 if (!loopSource.isPlaying) loopSource.Play();
                 float amount = this.GetRechargeScalar() * DayNightCycle.main.deltaTime * 40f * WindyMultiplier(new Vector2(transform.position.x, transform.position.z));
                 this.relay.ModifyPower(amount / 4f, out float num);
-                if(QPatch.config.TurbineTakesDamage && health.health - num > 0f) health.TakeDamage(num / 17f);
+                if(QPatch.config.TurbineTakesDamage && health.health - num > 0f) health.TakeDamage(num / 15f);
                 this.spin.spinSpeed = amount * 10f;
-                this.loopSource.volume = Mathf.Clamp(amount, 0.6f, 0.8f);
+                this.loopSource.volume = Mathf.Clamp(amount, 0.6f, 1f);
             }
             if (NeedsMaintenance)
             {
@@ -121,7 +118,7 @@ namespace WindTurbinesMod.WindTurbine
             if(constructable == null) constructable = gameObject.GetComponent<Constructable>();
             if (constructable.constructed)
             {
-                if(spin.transform.position.y > 1f)
+                if(spin.transform.position.y > Ocean.main.GetOceanLevel() + 1f)
                 {
                     if(NeedsMaintenance)
                     {
