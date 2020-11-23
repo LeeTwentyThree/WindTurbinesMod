@@ -96,6 +96,10 @@ namespace WindTurbinesMod
             var turbine = new WindTurbine.TurbinePatch();
             turbine.Patch();
 
+            //Add the databank entry.
+            LanguageHandler.SetLanguageLine("Ency_WindTurbine", "Wind Turbine");
+            LanguageHandler.SetLanguageLine("EncyDesc_WindTurbine", string.Format("A large generator suspended by 17.5 meter tall pole. The lightweight blades are rotated by the planet's strong air currents and efficiently converts the force into electrical energy. The generator contains a large internal battery that can hold up to {0} units of power. Unlike solar panels, these operate at roughly the same efficiency throughout the day. Orientation does not appear to affect power output. However certain places seem to simply have more wind than others. Power output also increases with altitude.", config.MaxPower));
+
             //This just isn't working for now. Maybe another update?
             //var windTool = new WindTool.WindToolPatch();
             //windTool.Patch();
