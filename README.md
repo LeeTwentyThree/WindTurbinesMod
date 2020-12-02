@@ -1,4 +1,4 @@
 - Lee23
 - Wind Turbines Mod
-- Discord: Lee23#3756
+- Discord: 32Eel#3756
 - https://www.nexusmods.com/subnautica/mods/355
